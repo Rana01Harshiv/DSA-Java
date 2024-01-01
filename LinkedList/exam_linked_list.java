@@ -78,8 +78,8 @@ public class exam_linked_list {
             System.out.println("2.insert at last");
             System.out.println("3.insert at position");
             System.out.println("4.Delete at position");
-
             System.out.println("5.exit");
+            
             System.out.println("Enter the positon: ");
             ch = sc.nextInt();
             switch(ch){

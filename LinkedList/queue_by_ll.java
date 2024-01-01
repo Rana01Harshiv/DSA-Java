@@ -1,4 +1,3 @@
-package Assigment_Java;
 
 import java.util.Scanner;
 class queuell{

@@ -1,8 +1,6 @@
 
-package Assigment_Java;
-
 import java.util.Scanner;
-
+/* 
 class Student {
     int rollNo;
     String name;
@@ -120,20 +118,23 @@ class StudentLinkedList {
 
 public class linked_list_stud {
     public static void main(String[] args) {
+
         StudentLinkedList studentList = new StudentLinkedList();
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
             System.out.println("\nStudent Record Management System");
+
             System.out.println("0. Insert at Begining");
             System.out.println("1. Insert at Last");
             System.out.println("2. Insert at Position");
             System.out.println("3. Delete by Roll No");
             System.out.println("4. Display All Students");
             System.out.println("5. Exit");
-            System.out.print("Enter your choice: ");
 
+            System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
+
             scanner.nextLine(); // Consume the newline character
 
             switch (choice) {
@@ -199,3 +200,139 @@ public class linked_list_stud {
     }
 }
 
+*/
+
+class student{
+    int rno;
+    String name;
+    student next;
+
+    student(int rno,String name){
+        this.rno = rno;
+        this.name = name;
+        this.next = null;
+    }
+}
+
+class studentList{
+    student head = null;
+    
+    public void insert(int rno,String name) {
+        student newstudent = new student(rno, name);
+
+        if(head == null){
+            head = newstudent;
+        }
+        newstudent.next = head;
+        head = newstudent;
+    }
+    // insert at last
+    public void insertAtLast(int rno,String name) {
+        student newstStudent = new student(rno, name);
+        if(head == null){
+            head = newstStudent;
+        }
+        student temp = head;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        temp.next = newstStudent;
+        
+    }
+    // insert at given position
+    public void insertatpos(int pos,int rno,String name) {
+        student newstStudent = new student(rno, name);
+        if(pos < 1){
+            System.out.println("Invalid Positon");
+        }
+        if(pos == 1){
+            insert(rno, name);
+        }
+        student temp = head;
+        int cnt =1;
+
+        while(temp != null && cnt < pos-1){
+            temp = temp.next;
+            cnt++;
+        }
+        if(temp == null){
+            System.out.println("Invalid position");
+
+        }else{
+            newstStudent.next = temp.next;
+            temp.next = newstStudent;
+
+        }
+        
+    }
+    // display
+    public void display() {
+        student temp = head; 
+        if(temp == null){
+            System.out.println("no data found");
+        }else{
+            System.out.println("Rollno \t Name");
+           while(temp != null){
+                System.out.println(temp.rno + "\t" + temp.name);
+                temp = temp.next;
+            }
+        }
+    }
+            
+}
+public class linked_list_stud{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        studentList stdl = new studentList();
+        int rno,ch,pos;
+        String name;
+        boolean flag = true;
+
+        while(flag){
+                System.out.println("1.Insert");
+                System.out.println("2.Insert at the Last");
+                System.out.println("3.Insert at the Position");
+                System.out.println("4.Display");
+                System.out.println("5.Exit");
+                System.out.println("Enter the choise: ");
+                ch = sc.nextInt();
+                switch(ch){
+                    case 1:
+                            System.out.println("Enter the roll no: ");
+                            rno = sc.nextInt();
+                            System.out.println("Enter the name: ");
+                            name = sc.next();
+                            stdl.insert(rno, name);
+                            break;
+                    case 2:
+                            System.out.println("Enter the roll no: ");
+                            rno = sc.nextInt();
+                            System.out.println("Enter the name: ");
+                            name = sc.nextLine();
+                            stdl.insertAtLast(rno, name);
+                            break;
+                    case 3:
+                            System.out.println("Ente the Position: ");
+                            pos = sc.nextInt();
+                            System.out.println("Enter the roll no: ");
+                            rno = sc.nextInt();
+                            System.out.println("Enter the name: ");
+                            name = sc.nextLine();
+                            stdl.insertatpos(pos, rno, name);
+                            break;
+
+                    case 4:
+                            stdl.display();
+                            break;
+                    case 5:
+                            System.out.println("You choose exit");
+                            flag = false;
+                            break;
+                    default:
+                            System.out.println("Invalid choise...");
+                            break;
+                }
+        }       
+        sc.close();
+    }
+}
